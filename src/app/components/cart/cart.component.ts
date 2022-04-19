@@ -36,6 +36,10 @@ export class CartComponent implements OnInit {
     this.subtotal.push(cant);
   }
 
+  public finalizarPedido() {
+    this._appService.finalizarPedido();
+  }
+
   public actualizarSubtotal () {
     console.log('actualizarSubtotal');
   }

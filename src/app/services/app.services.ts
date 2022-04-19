@@ -33,6 +33,7 @@ export class AppServices {
   private cesta:Cesta[] = [];
   public elements: Number[] = [0];
   public subTotal: any;
+  public alert: Boolean[] = [];
 
   constructor() {
     console.log("Servicio listo para usarse");
@@ -60,6 +61,16 @@ export class AppServices {
     this.elements.pop();
     this.elements.push(cartNow + subArticle)
     this.cesta.push(article);
+  }
+
+  finalizarPedido() {
+    if (this.cesta.length > 0 ) {
+      this.alert.push(true);
+    }
+  }
+  
+  showAlert () {
+    this.alert.push(true);
   }
 
   searchHeroe( termino:string ):Producto[]{

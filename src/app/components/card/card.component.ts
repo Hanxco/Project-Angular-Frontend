@@ -13,13 +13,14 @@ export class CardComponent implements OnInit {
   @Input() index: number | undefined;
   @Input() tallaSel:any = '0';
   @Input() cantidadSel:any = '0';
+  @Input() showImage:Boolean = false;
 
-  @Output() heroeSeleccionado: EventEmitter<number>;
+  @Output() productoSeleccionado: EventEmitter<number>;
   @Output() comprarArticulo: EventEmitter<number>;
 
   constructor( private router:Router,
     private _appService: AppServices ) {
-    this.heroeSeleccionado = new EventEmitter();
+    this.productoSeleccionado = new EventEmitter();
     this.comprarArticulo = new EventEmitter();
   }
 
@@ -27,12 +28,6 @@ export class CardComponent implements OnInit {
   }
 
   public comprar (producto:Producto) {
-    console.log('comprar')
-    console.log(producto)
-    console.log('tallaSel')
-    console.log(this.tallaSel)
-    console.log('cantidadSel')
-    console.log(this.cantidadSel)
     let cesta = {} as Cesta;
     cesta.nombre = producto.nombre;
     cesta.cantidad = this.cantidadSel;
@@ -40,9 +35,15 @@ export class CardComponent implements OnInit {
     cesta.imagen = this.producto.imagen;
     cesta.subtotal = Number(this.producto.precio) * Number(this.cantidadSel);
     cesta.talla = this.tallaSel;
-    console.log(cesta);
     this._appService.addProducto(cesta);
-    this.comprarArticulo.emit(99);
+  }
+
+  public finalizarPedido() {
+    this._appService.finalizarPedido();
+  }
+
+  public showImg() {
+    this.showImage = !this.showImage;
   }
   
 

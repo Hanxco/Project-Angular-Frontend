@@ -1,7 +1,11 @@
 <div class="col mb-4">
     <div class="card p-1">
-        <img src="{{producto.imagen}}" class="card-img-top" alt="...">
+        <img [ngStyle]="{'transition':'0.5s','transform':showImage == true ? 'scale(1.5,1.5)' : 'scale(1,1)'}" (mouseover)="showImg()"
+            (mouseleave)="showImg()"
+            src="{{producto.imagen}}" 
+            class="card-img-top" alt="...">
         <div class="card-body">
+            
             <h3 class="card-title">{{ producto.nombre }}</h3>
             <p class="card-text">{{ producto.descripcion }}</p>
             <p class="card-text"><b>Precio: </b>{{ producto.precio }} €</p>

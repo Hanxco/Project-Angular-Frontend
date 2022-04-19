@@ -10,12 +10,14 @@ import { AppServices, Categoria } from 'src/app/services/app.services';
 export class HeaderComponent implements OnInit {
 
   categorias:Categoria[] = [];
+  alert:Boolean[] = [];
 
   constructor( private _appService: AppServices,
                private router:Router ) { }
 
   ngOnInit(): void {
     this.categorias = this._appService.getCategorias();
+    this.alert = this._appService.alert;
   }
 
 }
