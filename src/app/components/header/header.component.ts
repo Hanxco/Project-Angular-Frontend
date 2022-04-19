@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppServices, Categoria } from 'src/app/services/app.services';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  categorias:Categoria[] = [];
+
+  constructor( private _appService: AppServices,
+               private router:Router ) { }
 
   ngOnInit(): void {
+    this.categorias = this._appService.getCategorias();
   }
 
 }

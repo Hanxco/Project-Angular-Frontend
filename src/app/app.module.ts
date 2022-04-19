@@ -7,20 +7,33 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardsBodyComponent } from './components/cards-body/cards-body.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CardComponent } from './components/card/card.component';
+import { GestioncategoriasComponent } from './components/gestioncategorias/gestioncategorias.component';
+import { GestionproductosComponent } from './components/gestionproductos/gestionproductos.component';
+import { BodyComponent } from './components/body/body.component';
+import { AppServices } from './services/app.services';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CardsBodyComponent,
-    CartComponent
+    CartComponent,
+    CardComponent,
+    GestioncategoriasComponent,
+    GestionproductosComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    AppServices
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,21 +12,26 @@
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Categorías
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li *ngFor="let number of categorias">
+                    <a class="dropdown-item" href="#">
+                      {{number.nombre}}
+                    </a>
+                  <li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Portal de administrador
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Gestión de categorías</a></li>
-                  <li><a class="dropdown-item" href="#">Gestión de productos</a></li>
+                <li class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" [routerLink] = "['gestioncategorias']">Gestión de categorías</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" [routerLink] = "['gestionproductos']">Gestión de productos</a>
+                </li>
               </ul>
             </li>
         </ul>

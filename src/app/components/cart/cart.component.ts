@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppServices, Cesta } from 'src/app/services/app.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  cesta:Cesta[] = [];
+  subtotal:Number[] = [];
+
+  constructor( private _appService: AppServices,
+              private router:Router ) { }
 
   ngOnInit(): void {
+    this.cesta = this._appService.getCesta();
+    this.subtotal = this._appService.elements;
+  }
+
+  public borrarArticulo (article:Cesta) {
+    let quantityReduce = article.cantidad - 1;
+    if (quantityReduce == 0) {
+      for (let i = 0 ; i < this.cesta.length; i++) {
+        if (this.cesta[i]._id == article._id) {
+          this.cesta.splice(i, 1);
+        }
+      }
+    } else {
+      article.cantidad = quantityReduce;
+    }
+    let cant = Number(this.subtotal) - Number(article.precio);
+    this.subtotal.pop();
+    this.subtotal.push(cant);
+  }
+
+  public actualizarSubtotal () {
+    console.log('actualizarSubtotal');
   }
 
 }

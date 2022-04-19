@@ -1,0 +1,29 @@
+<div class="col mb-4">
+    <div class="card p-1">
+        <img src="{{producto.imagen}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h3 class="card-title">{{ producto.nombre }}</h3>
+            <p class="card-text">{{ producto.descripcion }}</p>
+            <p class="card-text"><b>Precio: </b>{{ producto.precio }} €</p>
+            <p class="card-text"><b>Stock: </b>{{ producto.stock }} units.</p>
+            <select [(ngModel)]="cantidadSel" class="form-select" aria-label="Default select example">
+                <option value="0">Cantidad</option>
+                <option value="{{ producto.stock }}">{{ producto.stock }}</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <select [(ngModel)]="tallaSel" class="form-select" aria-label="Default select example">
+                <option value="0">Talla</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            <input type="button" 
+                   class="btn btn-primary mt-3"
+                   (click)="comprar(producto)"
+                   value="Comprar" />
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppServices, Producto } from 'src/app/services/app.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cards-body',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cards-body.component.css']
 })
 export class CardsBodyComponent implements OnInit {
+  
+  productos:Producto[] = [];
 
-  constructor() { }
+  constructor( private _appService: AppServices,
+               private router:Router ) { }
 
   ngOnInit(): void {
+    this.productos = this._appService.getProductos();
+  }
+
+  verHeroe(index:number){
+    //this.router.navigate( ['./productos/heroe', this.index] );
   }
 
 }
