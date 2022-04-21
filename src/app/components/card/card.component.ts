@@ -14,6 +14,7 @@ export class CardComponent implements OnInit {
   @Input() tallaSel:any = '0';
   @Input() cantidadSel:any = '0';
   @Input() showImage:Boolean = false;
+  @Input() fueraStock:Boolean = false;
 
   @Output() productoSeleccionado: EventEmitter<number>;
   @Output() comprarArticulo: EventEmitter<number>;
@@ -38,7 +39,12 @@ export class CardComponent implements OnInit {
     cesta.subtotal = Number(this.producto.precio) * Number(this.cantidadSel);
     cesta.talla = this.tallaSel;
     cesta.productId = this.producto._id;
-    this._appService.addProducto(cesta);
+    let card = this._appService.addProducto(cesta);
+    this.tallaSel = '0';
+    this.cantidadSel = '0';
+    if (card?.stock == 0) {
+      this.fueraStock = true;
+    }
   }
 
   public finalizarPedido() {

@@ -63,11 +63,14 @@ export class AppServices {
     this.elements.pop();
     this.elements.push(cartNow + subArticle)
     this.cesta.push(article);
+    var productRet;
     for (var i = 0; i < this.productos.length; i++) {
       if (this.productos[i]._id == article.productId) {
         this.productos[i].stock = this.productos[i].stock - article.cantidad;
+        productRet = this.productos[i];
       }
     }
+    return productRet;
   }
 
   finalizarPedido() {

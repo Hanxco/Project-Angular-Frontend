@@ -1,6 +1,8 @@
 <div class="col mb-4">
     <div class="card">
-        <img [ngStyle]="{'transition':'0.5s','transform':showImage == true ? 'scale(1.5,1.5)' : 'scale(1,1)'}" (mouseover)="showImg()"
+        <img [ngStyle]="{'transition':'0.5s','transform':showImage == true && !fueraStock ? 'scale(1.5,1.5)' : 'scale(1,1)', 
+                        'opacity':fueraStock == true ? '0.1' : '1'}" 
+            (mouseover)="showImg()"
             (mouseleave)="showImg()"
             src="{{producto.imagen}}" 
             class="card-img-top" alt="...">
