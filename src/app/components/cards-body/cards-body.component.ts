@@ -16,9 +16,10 @@ export class CardsBodyComponent implements OnInit {
 
   ngOnInit(): void {
     this.productos = this._appService.getProductos();
+    this._appService.productsView = this.productos;
   }
 
-  verProducto(index:number){
+  verProducto(index:number) {
     //this.router.navigate( ['./productos/heroe', this.index] );
   }
 

@@ -20,20 +20,22 @@ export class AppServices {
   ];
 
   private categorias:Categoria[] = [
-    { _id:1, nombre: "Camisetas", descripcion: "", orden: "1" },
-    { _id:2, nombre: "Camisas", descripcion: "", orden: "2" },
-    { _id:3, nombre: "Pantalones", descripcion: "", orden: "3" },
-    { _id:4, nombre: "Abrigos", descripcion: "", orden: "4" },
-    { _id:5, nombre: "Sudaderas", descripcion: "", orden: "5" },
-    { _id:6, nombre: "Calzado", descripcion: "", orden: "6" },
-    { _id:7, nombre: "Ropa interior", descripcion: "", orden: "7" },
-    { _id:8, nombre: "Pijamas", descripcion: "", orden: "8" }
+    { _id:1, nombre: "Camisetas", descripcion: "Todo tipo de camisetas", orden: "1" },
+    { _id:2, nombre: "Camisas", descripcion: "Las mejores camisas", orden: "2" },
+    { _id:3, nombre: "Pantalones", descripcion: "Pantalones para todas las actividades", orden: "3" },
+    { _id:4, nombre: "Abrigos", descripcion: "El mejor abrigo", orden: "4" },
+    { _id:5, nombre: "Sudaderas", descripcion: "Sudaderas comodas", orden: "5" },
+    { _id:6, nombre: "Calzado", descripcion: "Zapatos y zapatillas", orden: "6" },
+    { _id:7, nombre: "Ropa interior", descripcion: "Ropa interior", orden: "7" },
+    { _id:8, nombre: "Pijamas", descripcion: "Pijamas", orden: "8" }
   ];
 
   private cesta:Cesta[] = [];
   public elements: Number[] = [0];
   public subTotal: any;
   public alert: Boolean[] = [];
+
+  public productsView:Producto[] = [];
 
   constructor() {
     console.log("Servicio listo para usarse");
@@ -61,6 +63,11 @@ export class AppServices {
     this.elements.pop();
     this.elements.push(cartNow + subArticle)
     this.cesta.push(article);
+    for (var i = 0; i < this.productos.length; i++) {
+      if (this.productos[i]._id == article.productId) {
+        this.productos[i].stock = this.productos[i].stock - article.cantidad;
+      }
+    }
   }
 
   finalizarPedido() {
@@ -73,22 +80,28 @@ export class AppServices {
     this.alert.push(true);
   }
 
-  searchHeroe( termino:string ):Producto[]{
-    let heroesArr:Producto[] = [];
-    termino = termino.toLowerCase();
+  findLastIdCategory () {
+    return this.categorias[this.categorias.length-1]._id;
+  }
 
-    for( let i=0; i< this.productos.length; i++ ){
-      let heroe = this.productos[i];
-      let nombre = heroe.nombre.toLowerCase();
-
-      if( nombre.indexOf( termino ) >= 0 ){
-        heroe._id = i;
-        heroesArr.push(heroe);
+  findCategoryById( id:number ) {
+    var category;
+    for (var i = 0 ; i < this.categorias.length; i++) {
+      if (this.categorias[i]._id == id) {
+        category = this.categorias[i];
       }
     }
-    console.log(heroesArr);
-    return heroesArr;
+    return category;
   }
+
+  restoreStockUnit ( units:number, productId:number ) {
+    for (var i = 0 ; i < this.productos.length; i++) {
+      if (this.productos[i]._id == productId) {
+        this.productos[i].stock = this.productos[i].stock + 1;
+      }
+    }
+  }
+
 }
 
 export interface Producto {
@@ -116,4 +129,5 @@ export interface Cesta {
   precio: number;
   imagen: string;
   subtotal: number;
+  productId:number;
 }

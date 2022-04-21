@@ -20,4 +20,8 @@ export class HeaderComponent implements OnInit {
     this.alert = this._appService.alert;
   }
 
+  handleCategoria (categoria:Categoria) {
+    this.router.navigate(['/categoria', categoria._id])
+  }
+
 }

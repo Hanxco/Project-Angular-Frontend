@@ -28,13 +28,16 @@ export class CardComponent implements OnInit {
   }
 
   public comprar (producto:Producto) {
-    let cesta = {} as Cesta;
+    let cesta = {} as Cesta;  
+    let cestaArr = this._appService.getCesta();
+    cesta._id = cestaArr.length > 0 ? cestaArr[cestaArr.length - 1]._id + 1: 0;
     cesta.nombre = producto.nombre;
     cesta.cantidad = this.cantidadSel;
     cesta.precio = this.producto.precio;
     cesta.imagen = this.producto.imagen;
     cesta.subtotal = Number(this.producto.precio) * Number(this.cantidadSel);
     cesta.talla = this.tallaSel;
+    cesta.productId = this.producto._id;
     this._appService.addProducto(cesta);
   }
 

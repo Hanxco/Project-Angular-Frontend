@@ -32,6 +32,9 @@ export class CartComponent implements OnInit {
       article.cantidad = quantityReduce;
     }
     let cant = Number(this.subtotal) - Number(article.precio);
+
+    // restore stock units select
+    this._appService.restoreStockUnit(quantityReduce, article.productId);
     this.subtotal.pop();
     this.subtotal.push(cant);
   }
@@ -41,7 +44,6 @@ export class CartComponent implements OnInit {
   }
 
   public actualizarSubtotal () {
-    console.log('actualizarSubtotal');
   }
 
 }

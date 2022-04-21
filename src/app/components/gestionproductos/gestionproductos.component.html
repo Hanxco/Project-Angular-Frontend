@@ -1,36 +1,87 @@
 <div class="container p-2 mb-10 p-5">
-  <h1 class="display-1">Gestión de productos</h1>
-  <form>
-      <div class="form-group p-2">
-          <label for="nombreForm">Nombre del producto</label>
-          <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-      </div>
-      <div class="form-group p-2">
-          <label for="descripcionForm">Descripción del producto</label>
-          <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
-        </div>
-      <div class="form-group p-2">
-        <label for="categoriaSelect">Categoría</label>
-        <select class="form-control" id="categoriaSelect">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="form-group p-2">
-        <label for="stockForm">Unidades en stock disponibles</label>
-        <input type="number" class="form-control" id="unitsStock" placeholder="Unidades en stock">
-      </div>
-      <div class="form-group p-2">
-          <label for="precioForm">Precio por unidad</label>
-          <input type="number" class="form-control" id="unitPrice" placeholder="Precio por unidad">
-      </div>
-      <div class="row">
-          <div class="col-md-12 offset-md-4">
-              <input type="button" class="btn btn-primary" value="Guardar cambios" />
+  <div class="row">
+    <div class="col">
+      <h1 class="display-1">Gestión de productos</h1>
+    </div>
+    <div class="col" style="text-align: right;">
+      <input type="button"
+            class="btn btn-primary"
+            value="Crear nuevo producto"
+            (click)="nuevoProducto()"
+            id="crearProducto"
+            name="crearProducto" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2 class="display-2">Listado de productos</h2>
+      <ul>
+          <li *ngFor="let element of productosList" (click)="editarProducto(element)" style="cursor: pointer;">
+              <a class="dropdown-item">
+                {{element.nombre}} / {{element.categoria}}
+              </a>
+          <li>
+      </ul>
+    </div>
+    <div class="col">
+      <form (ngSubmit)="onSubmit()" #categForm="ngForm" novalidate="">
+        <div class="form-group p-2">
+            <label for="nombreForm">Nombre del producto</label>
+            <input type="text" 
+                  class="form-control" 
+                  id="nombre"
+                  name="nombre"
+                  [(ngModel)]="producto.nombre" 
+                  #name="ngModel"
+                  placeholder="Nombre">
+                </div>
+                <div class="form-group p-2">
+                  <label for="descripcionForm">Descripción del producto</label>
+                  <input type="text" 
+                  class="form-control" 
+                  id="descripcion" 
+                  [(ngModel)]="producto.descripcion" 
+                  #name="ngModel"
+                  name="descripcion"
+                  placeholder="Descripción">
+            </div>
+          <div class="form-group p-2">
+            <label for="categoriaSelect">Categoría</label>
+            <select class="form-control" 
+                    id="categoriaSelect">
+              <option *ngFor="let element of categoriaList">
+                {{ element.nombre }}
+              </option>
+            </select>
           </div>
-      </div>
-  </form>
+          <div class="form-group p-2">
+            <label for="stockForm">Unidades en stock disponibles</label>
+            <input type="number" 
+                  class="form-control" 
+                  name="unitsStock"
+                  #name="ngModel"
+                  [(ngModel)]="producto.stock" 
+                  id="unitsStock" 
+                  placeholder="Unidades en stock">
+          </div>
+          <div class="form-group p-2">
+              <label for="precioForm">Precio por unidad</label>
+              <input type="number" 
+                    class="form-control" 
+                    [(ngModel)]="producto.precio" 
+                    #name="ngModel"
+                    name="unitPrice" 
+                    id="unitPrice" 
+                    placeholder="Precio por unidad">
+          </div>
+          <div class="row">
+              <div class="col-md-12 offset-md-4">
+                  <input type="submit" 
+                        class="btn btn-primary" 
+                        value="Guardar cambios" />
+              </div>
+          </div>
+      </form>
+    </div>
+  </div>
 </div>

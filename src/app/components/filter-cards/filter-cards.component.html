@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-xl-9 col-md-7 col-sm-12">
+        <section>
+            <div class="container p-4">
+                <table>
+                    <tr>
+                        <td>
+                            <h1 class="display-1 p-2">{{ categoria.nombre }}</h1>
+                        </td>
+                        <td>
+                            <a class="ms-3" [routerLink] = "['/']">Borrar filtros</a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+                    <app-card [producto]="producto"
+                            [index]="i"
+                            *ngFor="let producto of productos; let i = index"></app-card>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-xl-3 col-md-5 col-sm-12">
+        <section>
+        <app-cart></app-cart>
+        </section>
+    </div>
+</div>

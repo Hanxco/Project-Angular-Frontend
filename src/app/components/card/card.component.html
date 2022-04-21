@@ -1,22 +1,21 @@
 <div class="col mb-4">
-    <div class="card p-1">
+    <div class="card">
         <img [ngStyle]="{'transition':'0.5s','transform':showImage == true ? 'scale(1.5,1.5)' : 'scale(1,1)'}" (mouseover)="showImg()"
             (mouseleave)="showImg()"
             src="{{producto.imagen}}" 
             class="card-img-top" alt="...">
         <div class="card-body">
-            
             <h3 class="card-title">{{ producto.nombre }}</h3>
             <p class="card-text">{{ producto.descripcion }}</p>
             <p class="card-text"><b>Precio: </b>{{ producto.precio }} €</p>
             <p class="card-text"><b>Stock: </b>{{ producto.stock }} units.</p>
-            <select [(ngModel)]="cantidadSel" class="form-select" aria-label="Default select example">
-                <option value="0">Cantidad</option>
-                <option value="{{ producto.stock }}">{{ producto.stock }}</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+            <select [(ngModel)]="cantidadSel" class="form-select" aria-label="Cantidad" aria-placeholder="Cantidad">
+                <option *ngFor="let dummy of ' '.repeat(producto.stock + 1).split(''), let x = index" value="{{ x }}">
+                    <div *ngIf="x == 0">Cantidad</div>
+                    <div *ngIf="x != 0">{{ x }}</div>
+                </option>
             </select>
-            <select [(ngModel)]="tallaSel" class="form-select" aria-label="Default select example">
+            <select [(ngModel)]="tallaSel" class="form-select mt-2" aria-label="Talla" aria-placeholder="Talla">
                 <option value="0">Talla</option>
                 <option value="XS">XS</option>
                 <option value="S">S</option>
@@ -24,10 +23,17 @@
                 <option value="L">L</option>
                 <option value="XL">XL</option>
             </select>
-            <input type="button" 
+            <input *ngIf="producto.stock > 0"
+                    type="button" 
                    class="btn btn-primary mt-3"
                    (click)="comprar(producto)"
                    value="Agregar a la cesta" />
+            <input *ngIf="producto.stock == 0"
+                   type="button" 
+                   id="btnAgotado" 
+                   name="btnAgotado" 
+                  class="btn btn-danger mt-3"
+                  value="Agotado" />
         </div>
     </div>
 </div>

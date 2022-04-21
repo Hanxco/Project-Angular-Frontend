@@ -13,6 +13,7 @@ import { GestionproductosComponent } from './components/gestionproductos/gestion
 import { BodyComponent } from './components/body/body.component';
 import { AppServices } from './services/app.services';
 import { FormsModule } from '@angular/forms';
+import { FilterCardsComponent } from './components/filter-cards/filter-cards.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     GestioncategoriasComponent,
     GestionproductosComponent,
     BodyComponent,
+    FilterCardsComponent,
   ],
   imports: [
     BrowserModule,

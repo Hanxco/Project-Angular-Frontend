@@ -1,8 +1,9 @@
 <div class="container p-4">
+    <h1 class="display-1 p-2">Todos los productos</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         <app-card (productoSeleccionado)="verProducto( $event )"
-                [producto]="producto"
-                [index]="i"
-                *ngFor="let producto of productos; let i = index"></app-card>
+                    [producto]="producto"
+                    [index]="i"
+                    *ngFor="let producto of productos; let i = index"></app-card>
     </div>
 </div>

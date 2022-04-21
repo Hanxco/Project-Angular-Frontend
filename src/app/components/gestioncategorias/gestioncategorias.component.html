@@ -1,22 +1,65 @@
 <div class="container p-2 mb-10 p-5">
-    <h1 class="display-1">Gestión de categorías</h1>
-    <form>
-        <div class="form-group p-2">
-            <label for="categoriaForm">Nombre de la categoría</label>
-            <input type="text" class="form-control" id="categoria" placeholder="Nombre">
+    <div class="row">
+        <div class="col">
+            <h1 class="display-1">Editar categorías</h1>
         </div>
-        <div class="form-group p-2">
-            <label for="descripcionForm">Descripción de la categoría</label>
-            <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
+        <div class="col" style="text-align: right;">
+            <input type="button"
+                    class="btn btn-primary"
+                    value="Crear nueva categoría"
+                    (click)="nuevaCategoria()"
+                    id="crearCategoria"
+                    name="crearCategoria" />
         </div>
-        <div class="form-group p-2">
-            <label for="ordenForm">Orden</label>
-            <input type="number" class="form-control" id="orden" placeholder="Orden">
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li *ngFor="let element of categoriaList" (click)="editarCategoria(element)" style="cursor: pointer;">
+                    <a class="dropdown-item">
+                      {{element.nombre}} / {{element.orden}}
+                    </a>
+                <li>
+            </ul>
         </div>
-        <div class="row">
-            <div class="col-md-12 offset-md-4">
-                <input type="button" class="btn btn-primary" value="Guardar cambios" />
-            </div>
+        <div class="col">
+            <form (ngSubmit)="onSubmit()" #categForm="ngForm" novalidate="">
+                <div class="form-group p-2">
+                    <label for="categoriaForm">Nombre de la categoría</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="nombre" 
+                            [(ngModel)]="categoria.nombre" 
+                            name="nombre" 
+                            #name="ngModel"
+                            placeholder="Nombre">
+                </div>
+                <div class="form-group p-2">
+                    <label for="descripcionForm">Descripción de la categoría</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="descripcion" 
+                            name="descripcion"
+                            #name="ngModel"
+                            [(ngModel)]="categoria.descripcion"
+                            placeholder="Descripción">
+                </div>
+                <div class="form-group p-2">
+                    <label for="ordenForm">Orden</label>
+                    <input type="number" 
+                            class="form-control"
+                            id="orden"
+                            name="orden"
+                            [(ngModel)]="categoria.orden"
+                            #name="ngModel"
+                            placeholder="Orden">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 offset-md-4">
+                        <input type="submit" class="btn btn-primary" value="Guardar cambios" />
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
